@@ -34,7 +34,6 @@ class RegisterActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
                 if (pass == confirmPass) {
-
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
                             val intent = Intent(this, LoginActivity::class.java)
@@ -48,11 +47,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             } else {
                 Toast.makeText(this, "Campos vazios não são permitidos!", Toast.LENGTH_SHORT).show()
-
             }
         }
-
     }
-
-
 }
