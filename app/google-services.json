@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "611367162925",
+    "project_id": "trackerlocalization",
+    "storage_bucket": "trackerlocalization.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611367162925:android:68ff0ebc6ed08baa2e54a4",
+        "android_client_info": {
+          "package_name": "br.dev.emiliano.mobile.trackerlocalization"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611367162925-vudjv78lc1bg6ef720p44il9r6jtbhor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1kVs2VbXK9SdmXVgf8zWfIsBl6k-oRNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611367162925-vudjv78lc1bg6ef720p44il9r6jtbhor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
