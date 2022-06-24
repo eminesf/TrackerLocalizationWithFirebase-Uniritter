@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -17,6 +18,10 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class GpsActivity : AppCompatActivity() {
@@ -39,7 +44,17 @@ class GpsActivity : AppCompatActivity() {
         locationRequest.fastestInterval = 2000
 
 
-        button.setOnClickListener(View.OnClickListener { getCurrentLocation() })
+        button.setOnClickListener(View.OnClickListener { setInterval(5000, 0) })
+
+    }
+
+    private fun setInterval(requestTimeout: Long, requestDelay: Long) {
+        Timer().scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                Log.i("interval", "This function is called every $requestTimeout seconds.")
+                getCurrentLocation()
+            }
+        }, requestDelay, requestTimeout)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
@@ -76,11 +91,20 @@ class GpsActivity : AppCompatActivity() {
                             LocationServices.getFusedLocationProviderClient(this@GpsActivity)
                                 .removeLocationUpdates(this)
                             if (locationResult.locations.size > 0) {
+
+                                var databaseRef: DatabaseReference
+                                databaseRef = Firebase.database.reference
+
                                 val index = locationResult.locations.size - 1
                                 val latitude =
                                     locationResult.locations[index].latitude
                                 val longitude =
                                     locationResult.locations[index].longitude
+
+                                var locationLogging = LocationLogging(latitude, longitude)
+                                databaseRef.child("user location").setValue(locationLogging)
+
+
                                 addressText.text = "Latitude: $latitude\nLongitude: $longitude"
                             }
                         }
